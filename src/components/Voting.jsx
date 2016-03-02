@@ -5,22 +5,21 @@ import Winner from './Winner';
 import Vote from './Vote';
 
 export const Voting = React.createClass({
-   mixins: [PureRenderMixin],
-   render: function() {
-       return <div>
-         {this.props.winner ? 
-            <Winner ref="winner" winner={this.props.winner} /> :
-            <Vote {...this.props} />
-         }
-       </div>
-   }
+  mixins: [PureRenderMixin],
+  render: function() {
+    return <div>
+      {this.props.winner ?
+        <Winner ref="winner" winner={this.props.winner} /> :
+        <Vote {...this.props} />}
+    </div>;
+  }
 });
 
-function mapStateToProps() {
-    return {
-      pair: state.getIn(['vote', 'pair']),
-      winner: state.get('winner')  
-    };
+function mapStateToProps(state) {
+  return {
+    pair: state.getIn(['vote', 'pair']),
+    winner: state.get('winner')
+  };
 }
 
-export const VotingContainer = connect(mapStateToProps, Voting);
+export const VotingContainer = connect(mapStateToProps)(Voting);
